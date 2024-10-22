@@ -1,13 +1,32 @@
 import React from "react";
 import "../resources/css/home.css";
 import { Avatar, Button, Typography } from "@mui/material";
-import { SOCIAL_MEDIA_ICONS, userProfileDefaultData } from "../Utils/Constants";
+import { SOCIAL_MEDIA_ICONS } from "../Utils/Constants";
 import Typewriter from "typewriter-effect";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
+import axios from "axios";
 
 function Home() {
+  const [userProfileDefaultData, setUserProfileDefaultData] = useState(null)
+  useEffect(() => {
+    async function fetch_data() {
+      try {
+        console.log("inside fetch");
+        const response = await axios.get(
+          "http://localhost:12000/users/getData"
+        );
+        setUserProfileDefaultData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetch_data();
+  }, []);
   const userName = userProfileDefaultData.Name;
-  const dpImage = userProfileDefaultData.Photo;
+  const dpImage = "";
   return (
     <div className="mainContainer">
       <div className="details">

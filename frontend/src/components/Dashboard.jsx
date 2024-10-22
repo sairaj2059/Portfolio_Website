@@ -16,11 +16,11 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import "../resources/css/dashboard.css";
+import axios from "axios";
 // import userName from
 import {
   DEFAULT_SIDE_MENU,
   IconTitleMap,
-  userProfileDefaultData,
 } from "../Utils/Constants";
 import {
   Avatar,
@@ -41,6 +41,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActivePage, setActiveSideMenu } from "../redux/slices/navSlice";
 import { CloseRounded } from "@mui/icons-material";
 import Home from "./Home";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const drawerWidth = 240;
 
@@ -155,8 +157,25 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function Dashboard() {
+  const [userProfileDefaultData, setUserProfileDefaultData] = useState(null)
+  useEffect(() => {
+    async function fetch_data() {
+      try {
+        console.log("inside fetch");
+        const response = await axios.get(
+          "http://localhost:13000/users/getData"
+        );
+        setUserProfileDefaultData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetch_data();
+  }, []);
+
   const theme = useTheme();
-  const userImage = userProfileDefaultData.Photo;
+  const userImage = "";
   // const [drawerOpen, setDrawerOpen] = React.useState(DEFAULT_DRAWER_FLAG);
   // const [ActivePage, setActivePage] = React.useState(DEFAULT_ACTIVE_PAGE);
   const [dataStatus, setDataStatus] = React.useState(false);
