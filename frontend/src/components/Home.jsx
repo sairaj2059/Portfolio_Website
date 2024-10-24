@@ -6,16 +6,17 @@ import Typewriter from "typewriter-effect";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import dpImage from "../resources/images/dp_image.png";
 import axios from "axios";
 
 function Home() {
-  const [userProfileDefaultData, setUserProfileDefaultData] = useState(null)
+  const [userProfileDefaultData, setUserProfileDefaultData] = useState({})
   useEffect(() => {
     async function fetch_data() {
       try {
         console.log("inside fetch");
         const response = await axios.get(
-          "http://localhost:12000/users/getData"
+          "http://localhost:13000/users/getData"
         );
         setUserProfileDefaultData(response.data);
         console.log(response.data);
@@ -26,7 +27,6 @@ function Home() {
     fetch_data();
   }, []);
   const userName = userProfileDefaultData.Name;
-  const dpImage = "";
   return (
     <div className="mainContainer">
       <div className="details">
@@ -49,7 +49,7 @@ function Home() {
               flex: "1 1 45%",
             }}
           >
-            I'M {userName.toUpperCase()}
+            I'M {userName}
           </Typography>
           <Typography
             variant="h2"

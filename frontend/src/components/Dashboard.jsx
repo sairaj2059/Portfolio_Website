@@ -16,12 +16,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import "../resources/css/dashboard.css";
+import userImage from "../resources/images/dp_image.png"
 import axios from "axios";
 // import userName from
-import {
-  DEFAULT_SIDE_MENU,
-  IconTitleMap,
-} from "../Utils/Constants";
+import { DEFAULT_SIDE_MENU, IconTitleMap } from "../Utils/Constants";
 import {
   Avatar,
   Menu,
@@ -39,10 +37,17 @@ import SocialProfiles from "./SocialProfiles";
 import { setDrawerOpen, setSnackbarOpen } from "../redux/slices/systemSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setActivePage, setActiveSideMenu } from "../redux/slices/navSlice";
-import { CloseRounded } from "@mui/icons-material";
+import {
+  CloseRounded,
+  CodeOutlined,
+  HomeMaxOutlined,
+  HomeOutlined,
+  SchoolOutlined,
+} from "@mui/icons-material";
 import Home from "./Home";
 import { useState } from "react";
 import { useEffect } from "react";
+import { CodeFilled, HomeFilled } from "@ant-design/icons";
 
 const drawerWidth = 240;
 
@@ -157,7 +162,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function Dashboard() {
-  const [userProfileDefaultData, setUserProfileDefaultData] = useState(null)
+  const [userProfileDefaultData, setUserProfileDefaultData] = useState({});
   useEffect(() => {
     async function fetch_data() {
       try {
@@ -175,7 +180,6 @@ export default function Dashboard() {
   }, []);
 
   const theme = useTheme();
-  const userImage = "";
   // const [drawerOpen, setDrawerOpen] = React.useState(DEFAULT_DRAWER_FLAG);
   // const [ActivePage, setActivePage] = React.useState(DEFAULT_ACTIVE_PAGE);
   const [dataStatus, setDataStatus] = React.useState(false);
@@ -242,6 +246,51 @@ export default function Dashboard() {
       </IconButton>
     </React.Fragment>
   );
+
+  // const [leftIcon, setLeftIcon] = useState(<CodeOutlined style={{ fontSize: "50px" }} />);
+  // const [rightIcon, setRightIcon] = useState(<SchoolOutlined style={{ fontSize: "50px" }} />);
+  const [isVisible, setIsVisible] = useState(false);
+  const [centerIndex, setCenterIndex] = useState(0);
+
+  // const handleSwap = (index)=>{
+  //     setCenterIndex(index)
+  // }
+
+  const handleIconClick = (index) => {
+    if (index !== centerIndex) {
+      setCenterIndex(index); // Update the center index with the clicked icon's index
+    }
+  };
+  const toggleIcons = () => {
+    setIsVisible(!isVisible);
+  };
+  // Toggle visibility of the left and right icons
+  // const showNavIcons = () => {
+  //   setIsVisible(!isVisible);
+  // };
+
+  // // Handle swapping icons
+  // const swapIcon = (clickedIcon) => {
+  //   setCenterIcon(clickedIcon);
+  // };
+
+  // Function to handle swapping left icon with center
+  // const swapWithLeft = () => {
+  //   setIsVisible(!isVisible)
+  //   const temp = centerIcon;
+  //   setCenterIcon(leftIcon);
+  //   setLeftIcon(temp);
+
+  // };
+
+  // // Function to handle swapping right icon with center
+  // const swapWithRight = () => {
+  //   setIsVisible(!isVisible)
+  //   const temp = centerIcon;
+  //   setCenterIcon(rightIcon);
+  //   setRightIcon(temp);
+
+  // };
 
   return (
     <Box sx={{ display: "flex" }} className="MainContainer">
@@ -393,10 +442,10 @@ export default function Dashboard() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
-              <Route path="/social-profile" element={<SocialProfiles />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/resume" element={<Resume />} />
               <Route path="/academics" element={<Academics />} />
+              <Route path="/social-profile" element={<SocialProfiles />} />
               <Route path="*" element={<h1>Jai sairam! Page not found</h1>} />
             </Routes>
           </div>
@@ -419,6 +468,73 @@ export default function Dashboard() {
             />
           </div>
         )}
+
+{/* <div className="navIconsContainer">
+      <div
+        className={`default-icon center-icon visible`}
+        onClick={toggleIcons}
+      >
+        {DEFAULT_SIDE_MENU[centerIndex].icon}
+      </div>
+
+      {DEFAULT_SIDE_MENU.map((data, index) =>
+        index !== centerIndex ? (
+          <div
+            className={`default-icon ${
+              index < 3 ? "left-icon" : "right-icon"
+            } ${isVisible ? 'visible' : ''}`}
+            key={index}
+            onClick={() => handleIconClick(index)}
+            style={{ "--index": index }}
+          >
+            {data.icon}
+          </div>
+        ) : null 
+      )}
+    </div> */}
+
+        {/* <div className="navIconsContainer">
+<Link className="sideMenuLinks" to="/">
+      <div
+        className={`nav-icon default-icon left-icon ${
+          isVisible ? "visible" : ""
+        }`}
+        onClick={swapWithLeft} // Swap on click
+      >
+        {leftIcon}
+      </div>
+      </Link>
+
+      <div className="home-button default-icon" onClick={showNavIcons}>
+        {centerIcon}
+      </div>
+      <div
+        className={`nav-icon default-icon right-icon ${
+          isVisible ? "visible" : ""
+        }`}
+        onClick={swapWithRight} // Swap on click
+      >
+        {rightIcon}
+      </div>
+    </div> */}
+
+        {/* <div className="navIconsContainer">
+          <div
+            className={`nav-icon default-icon left-icon ${isVisible ? "visible" :""}`}
+            onClick={iconClick}
+          >
+            <CodeOutlined sx={{ fontSize: "50px" }} />
+          </div>
+
+          <div className="home-button default-icon" onClick={showNavIcons}>
+            <HomeOutlined sx={{ fontSize: "50px" }} />
+          </div>
+          <div
+            className={`nav-icon default-icon right-icon ${isVisible ? "visible" : ""}`}
+          >
+            <SchoolOutlined sx={{ fontSize: "50px" }} />
+          </div>
+        </div> */}
       </Box>
       <Snackbar
         open={openSnackbar}

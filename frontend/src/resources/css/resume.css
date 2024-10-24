@@ -1,0 +1,37 @@
+.navIconsContainer {
+    display: flex;
+    align-self: flex-end;
+    justify-items: center;
+  }
+  
+  .default-icon {
+    position: absolute;
+    transition: transform 0.5s ease, opacity 0.5s ease; 
+    cursor: pointer;
+    border-radius: 100px;
+    padding:5px;
+  }
+  
+  .center-icon{
+      z-index: 10;
+      background-color: #a79248;
+  }
+  
+  .left-icon{
+      opacity: 0;
+  }
+  
+  .left-icon.visible{
+      opacity: 1;
+      transform: translateX(calc(-50px * var(--index)));
+  }
+  
+  .right-icon{
+      opacity: 0;
+  }
+  
+  .right-icon.visible{
+      opacity: 1;
+      transform: translateX(calc(50px * (var(--index) - 2))); 
+  }
+  
