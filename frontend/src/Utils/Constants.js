@@ -31,11 +31,6 @@ export const IconTitleMap = {
   Projects: <CodeRounded className="icon" />,
   "Social Profiles": <DraftsRounded className="icon" />,
   Resume: <ContactPageRounded className="icon" />,
-  "Contact Us": <CallIcon className="icon" />,
-  "All Mail": <MailIcon className="icon" />,
-  Trash: <DeleteIcon className="icon" />,
-  Spam: <ErrorIcon className="icon" />,
-  Subscribers: <ThumbUpAlt className="icon" />,
   GitHub: <GitHub className="icon" />,
   Facebook: <Facebook className="icon" />,
   LinkedIn: <LinkedIn className="icon" />,
@@ -92,7 +87,7 @@ export const SOCIAL_MEDIA_ICONS = [
 
 
 export const DEFAULT_DRAWER_FLAG = true;
-export const DEFAULT_ACTIVE_PAGE = DEFAULT_SIDE_MENU[0].title;
+export const DEFAULT_ACTIVE_PAGE = DEFAULT_SIDE_MENU[0];
 
 export const DarkTheme = "dark";
 export const LightTheme = "light";

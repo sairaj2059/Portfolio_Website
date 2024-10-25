@@ -223,7 +223,7 @@ export default function Dashboard() {
 
   const activeBtnChange = (index) => {
     setDataStatus(true);
-    dispatch(setActivePage({ activePage: DEFAULT_SIDE_MENU[index].title }));
+    dispatch(setActivePage({ activePage: DEFAULT_SIDE_MENU[index] }));
     dispatch(setActiveSideMenu({ activeSideMenu: index }));
   };
 
@@ -321,7 +321,7 @@ export default function Dashboard() {
               color: "#544600",
             }}
           >
-            {IconTitleMap[ActivePage]} {ActivePage}
+            {IconTitleMap[ActivePage.title]} {ActivePage.title}
           </Typography>
         </Toolbar>
         <Box className="profile">
@@ -438,7 +438,7 @@ export default function Dashboard() {
 
         {dataStatus ? (
           <div className="MainComponent">
-            <BreadCrumbComponent data={["Portfolio", ActivePage]} />
+            <BreadCrumbComponent data={["Portfolio", ActivePage.title]} />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />

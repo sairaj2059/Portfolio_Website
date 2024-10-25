@@ -3,8 +3,8 @@ import { DEFAULT_ACTIVE_PAGE } from "../../Utils/Constants";
 
 const initialState={
     activeSideMenu: 0,
-    ActivePage: DEFAULT_ACTIVE_PAGE,
-    breadcrumb: ["Portfolio", DEFAULT_ACTIVE_PAGE]     
+    ActivePage: DEFAULT_ACTIVE_PAGE.title,
+    breadcrumb: ["Portfolio", DEFAULT_ACTIVE_PAGE.title]     
 }
 
 export const NavigationSlice= createSlice({
