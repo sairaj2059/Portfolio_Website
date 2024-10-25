@@ -41,6 +41,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActivePage, setActiveSideMenu } from "../redux/slices/navSlice";
 import { CloseRounded } from "@mui/icons-material";
 import Home from "./Home";
+import userImage from "../resources/images/dp_image.png"
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -136,21 +137,6 @@ const Drawer = styled(MuiDrawer, {
 
 export default function Dashboard() {
   const [userProfileDefaultData, setUserProfileDefaultData] = useState({})
-  // useEffect(() => {
-  //   async function fetch_data() {
-  //     try {
-  //       console.log("inside fetch");
-  //       const response = await axios.get(
-  //         "http://localhost:13000/users/getData"
-  //       );
-  //       setUserProfileDefaultData(response.data);
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   fetch_data();
-  // }, []);
 
   useEffect(() => {
     function fetch_data() {
@@ -167,7 +153,6 @@ export default function Dashboard() {
 }, []);
 
   const theme = useTheme();
-  const userImage = "";
   const [dataStatus, setDataStatus] = React.useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const userName = userProfileDefaultData.Name;
@@ -250,48 +235,7 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              color: "#544600",
-            }}
-          >
-            {IconTitleMap[ActivePage]} {ActivePage}
-          </Typography>
         </Toolbar>
-        <Box className="profile">
-          <Avatar
-            alt={userName}
-            src={userImage}
-            sx={{ mr: 7, border: "3px solid #544600", cursor: "pointer" }}
-            onClick={handleClick}
-          />
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={openAvatarMenu}
-            onClose={handleCloseAvatarMenu}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-            }}
-          >
-            {/* Todo: Extract out in a list in constants file also add resume */}
-            <MenuItem onClick={() => AvatarMenuClickHandler(0)}>
-              Profile
-            </MenuItem>
-            <MenuItem onClick={() => AvatarMenuClickHandler(1)}>
-              Download Resume
-            </MenuItem>
-            <MenuItem onClick={() => AvatarMenuClickHandler(2)}>
-              Dark Mode
-            </MenuItem>
-          </Menu>
-        </Box>
       </AppBar>
 
       <Drawer variant="permanent" open={drawerOpen}>
@@ -307,7 +251,7 @@ export default function Dashboard() {
             style={{
               marginRight: "auto",
               marginLeft: "4%",
-              fontSize: "20px",
+              fontSize: "18px",
               color: "#544600",
             }}
           >
@@ -375,10 +319,7 @@ export default function Dashboard() {
 
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-
-        {dataStatus ? (
           <div className="MainComponent">
-            <BreadCrumbComponent data={["Portfolio", ActivePage]} />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
@@ -389,33 +330,7 @@ export default function Dashboard() {
               <Route path="*" element={<h1>Jai sairam! Page not found</h1>} />
             </Routes>
           </div>
-        ) : (
-          <div className="SkeletonComponent" style={{ padding: "1%" }}>
-            <Skeleton
-              sx={{ mb: 1, width: "98%" }}
-              variant="rectangular"
-              height={80}
-            />
-            <Skeleton
-              sx={{ mb: 1, width: "90%" }}
-              variant="rectangular"
-              height={100}
-            />
-            <Skeleton
-              sx={{ mb: 1, width: "100%" }}
-              variant="rectangular"
-              height={210}
-            />
-          </div>
-        )}
       </Box>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        message={snackbarMessage}
-        action={action}
-      />
     </Box>
   );
 }

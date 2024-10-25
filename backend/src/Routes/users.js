@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userProfileDefaultData = {
-    Name: "Raj Guragain",
+    Name: "RAJ GURAGAIN",
     UserName: "raj_guragain",
     DOB: "01-03-2003",
     Address: " Bangalore",
@@ -9,6 +9,8 @@ const userProfileDefaultData = {
     PhoneNo: "987665432",
     Description: "Sairam",
   };
+
+  
 
 // Define a route
 router.get('/getData', (req, res) => {

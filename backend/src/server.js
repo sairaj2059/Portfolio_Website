@@ -3,14 +3,17 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 require('dotenv').config()
+const path = require('path');
 
 // Include route files
 const usersRoute = require('./Routes/users')
 
-// Example defining a route in Express
-app.get('/', (req, res) => {
-    res.send('<h1>Hello, Express.js Server!</h1>')
-})
+app.use(cors());
+app.get('/downloadPdf', (req, res) => {
+    const filePath = path.join(__dirname, './public/Raj_Guragain_Resume.pdf');
+    res.sendFile(filePath);
+});
+
 
 // Use routes
 app.use(cors())
