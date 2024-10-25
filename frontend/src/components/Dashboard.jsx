@@ -89,28 +89,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-// const AppBar = styled(MuiAppBar, {
-//   shouldForwardProp: (prop) => prop !== "open",
-// })(({ theme, open }) => ({
-//   zIndex: theme.zIndex.drawer + 1,
-//   display: "flex",
-//   flexDirection: "row",
-//   justifyContent: "space-between",
-//   alignItems: "center",
-//   transition: theme.transitions.create(["width", "margin"], {
-//     easing: theme.transitions.easing.sharp,
-//     duration: theme.transitions.duration.leavingScreen,
-//   }),
-//   ...(open && {
-//     marginLeft: drawerWidth,
-//     width: `calc(100% - ${drawerWidth}px)`,
-//     transition: theme.transitions.create(["width", "margin"], {
-//       easing: theme.transitions.easing.sharp,
-//       duration: theme.transitions.duration.enteringScreen,
-//     }),
-//   }),
-// }));
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -157,29 +135,40 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function Dashboard() {
-  const [userProfileDefaultData, setUserProfileDefaultData] = useState(null)
+  const [userProfileDefaultData, setUserProfileDefaultData] = useState({})
+  // useEffect(() => {
+  //   async function fetch_data() {
+  //     try {
+  //       console.log("inside fetch");
+  //       const response = await axios.get(
+  //         "http://localhost:13000/users/getData"
+  //       );
+  //       setUserProfileDefaultData(response.data);
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   fetch_data();
+  // }, []);
+
   useEffect(() => {
-    async function fetch_data() {
-      try {
-        console.log("inside fetch");
-        const response = await axios.get(
-          "http://localhost:13000/users/getData"
-        );
-        setUserProfileDefaultData(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
+    function fetch_data() {
+        axios.get("http://localhost:13000/users/getData")
+            .then((response) => {
+                setUserProfileDefaultData(response.data);
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
     fetch_data();
-  }, []);
+}, []);
 
   const theme = useTheme();
   const userImage = "";
-  // const [drawerOpen, setDrawerOpen] = React.useState(DEFAULT_DRAWER_FLAG);
-  // const [ActivePage, setActivePage] = React.useState(DEFAULT_ACTIVE_PAGE);
   const [dataStatus, setDataStatus] = React.useState(false);
-  // const [activeSideMenu, setactiveSideMenu] = React.useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const userName = userProfileDefaultData.Name;
   const openAvatarMenu = Boolean(anchorEl);
