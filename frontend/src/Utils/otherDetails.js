@@ -34,6 +34,11 @@ export const PROJECTS_DETAILS = [
     description:
       "I used HTML, CSS and Javascript to make a music player which plays songs and displays images linked.",
     gitLink: "https://github.com/sairaj2059/Music-player-website",
+  },{
+    name: "Music Player Website",
+    description:
+      "I used HTML, CSS and Javascript to make a music player which plays songs and displays images linked.",
+    gitLink: "https://github.com/sairaj2059/Music-player-website",
   },
 ];
 
@@ -89,5 +94,5 @@ export const ACADEMICS_DATA = [
         detail: "",
       },
     ],
-  },
+  }
 ];

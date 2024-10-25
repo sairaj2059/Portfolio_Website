@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userProfileDefaultData = {
-    Name: "Raj Guragain",
+    Name: "RAJ GURAGAIN",
     UserName: "raj_guragain",
     DOB: "01-03-2003",
     Address: " Bangalore",

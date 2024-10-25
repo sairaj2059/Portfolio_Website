@@ -50,6 +50,7 @@ function Academics() {
   return (
     <>
       <List
+      className="academicsContainer"
         sx={{
           width: "100%",
           maxWidth: "100%",
@@ -58,6 +59,7 @@ function Academics() {
           flexDirection: "column",
           ml:'20px',
           gap: "20px",
+          textAlign:'center'
         }}
       >
         {ACADEMICS_DATA.map((data, index) => (
@@ -72,11 +74,11 @@ function Academics() {
             key={index}
           >
             <CardHeader
-              avatar={
-                <Avatar sx={{ background: "transparent", color: "black" }}>
-                  <SchoolIcon />
-                </Avatar>
-              }
+              // avatar={
+              //   // <Avatar sx={{ background: "transparent", color: "black" }}>
+              //   //   <SchoolIcon />
+              //   // </Avatar>
+              // }
               sx={{ color: "black",  }}
               title={<Typography sx={{fontSize:'20px', fontWeight:800}}>
                 {data.name}

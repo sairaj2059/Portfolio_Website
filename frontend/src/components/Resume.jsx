@@ -1,54 +1,62 @@
-import React, { useEffect } from 'react'
-import { DEFAULT_ACTIVE_PAGE, DEFAULT_SIDE_MENU } from '../Utils/Constants'
-import { useState } from 'react';
-import "../resources/css/resume.css"
-import { Link } from 'react-router-dom';
+import React from "react";
+import { DEFAULT_SIDE_MENU } from "../Utils/Constants";
+import { useState } from "react";
+import "../resources/css/resume.css";
+import { Link } from "react-router-dom";
 
 function Resume() {
   const [isVisible, setIsVisible] = useState(false);
   const [centerIndex, setCenterIndex] = useState(0);
+  var iconsCount = 0;
 
-  // const handleSwap = (index)=>{
-  //     setCenterIndex(index)
-  // }
-
-  const handleIconClick = (index) => {
-    console.log(centerIndex, index)
-    if (index !== centerIndex) {
-      setCenterIndex(index); // Update the center index with the clicked icon's index
-    }
-  };
   const toggleIcons = () => {
-    console.log(isVisible)
+    console.log("center: "+ centerIndex)
     setIsVisible(!isVisible);
   };
-  return (
-    <div className="navIconsContainer" style={{display:'flex', justifyContent:'center', alignItems:'center'}}>
-      <div
-        className={`default-icon center-icon ${isVisible ? 'visible' : ''}`}
-        onClick={toggleIcons}
-      >
-        {DEFAULT_SIDE_MENU[centerIndex].icon}{centerIndex}
-      </div>
 
-      {DEFAULT_SIDE_MENU.map((data, index) =>
-        index !== centerIndex ? (
-          // <Link className="sideMenuLinks"to={data.link} >
+  const handleIconClick = (index) => {
+    console.log(index)
+    setCenterIndex(index);
+    toggleIcons();
+  };
+  return (
+    <div
+      className="navIconsContainer"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        className={`default-icon center-icon visible`}
+        onClick={toggleIcons}
+        key={centerIndex}
+      >
+        {DEFAULT_SIDE_MENU[centerIndex].icon}
+      </div>
+      {DEFAULT_SIDE_MENU.map((data, index) => {
+        
+        if (index === centerIndex) return null; 
+        iconsCount++;
+        return (
           <div
             className={`default-icon ${
-              index < 3 ? "left-icon" : "right-icon"
-            } ${isVisible ? 'visible' : ''}`}
+              iconsCount < 3 ? "left-icon" : "right-icon"
+            } ${isVisible ? "visible" : ""}`}
             key={index}
             onClick={() => handleIconClick(index)}
-            style={{ "--index": index }}
+            style={{
+              "--index": iconsCount, 
+            }}
           >
-            {data.icon}{index}
+            <Link to={data.link} className="navLinks">
+            {data.icon}</Link>
           </div>
-          // </Link>
-        ) : null 
-      )}
+        );
+      })}
     </div>
-  )
+  );
 }
 
-export default Resume
+export default Resume;

@@ -60,47 +60,57 @@
 
 .MainContainer {
   display: flex;
+  flex-direction: column;
+  width: 100vw;
   height: 100vh;
-  /* background-image: url("../images/wallpaper1.jpg"); */
-  background: linear-gradient(to right, #fff9e6, #fff9e6);
-  background-repeat: no-repeat;
-  background-size: cover;
+  padding-bottom: 50px;
 }
 
-/* .navIconsContainer {
-  display: flex;
-  align-self: flex-end;
-  justify-items: center;
+.MainComponent{
+  height: 80Vh;
+}
+
+.navIconsContainer{
+  margin-top: 2rem;
 }
 
 .default-icon {
-  position: absolute;
-  transition: transform 0.5s ease, opacity 0.5s ease; 
+  position: fixed;
+  transition: transform 0.5s ease, opacity 0.5s ease;
   cursor: pointer;
-  border-radius: 100px;
-  padding:5px;
-}
-
-.center-icon{
-    z-index: 10;
+  border-radius: 50%;
+  padding: 5px;
+  &:hover{
     background-color: #a79248;
+  }
 }
 
-.left-icon{
-    opacity: 0;
+.center-icon {
+  position: fixed;
+  z-index: 10;
+  background-color: #a79248;
 }
 
-.left-icon.visible{
-    opacity: 1;
-    transform: translateX(calc(-50px * var(--index)));
+.left-icon {
+  opacity: 0;
 }
 
-.right-icon{
-    opacity: 0;
+.left-icon.visible {
+  opacity: 1;
+  transform: translateX(calc(-50px * var(--index)));
 }
 
-.right-icon.visible{
-    opacity: 1;
-    transform: translateX(calc(50px * (var(--index) - 2))); 
-} */
+.right-icon {
+  opacity: 0;
+}
 
+.right-icon.visible {
+  opacity: 1;
+  transform: translateX(calc(50px * (var(--index) - 2)));
+}
+
+
+.navLinks{
+text-decoration: none;
+color: inherit;
+}

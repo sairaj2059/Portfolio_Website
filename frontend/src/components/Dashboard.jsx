@@ -19,36 +19,25 @@ import "../resources/css/dashboard.css";
 import userImage from "../resources/images/dp_image.png"
 import axios from "axios";
 // import userName from
-import { DEFAULT_SIDE_MENU, IconTitleMap } from "../Utils/Constants";
+import { DEFAULT_SIDE_MENU } from "../Utils/Constants";
 import {
   Avatar,
-  Menu,
-  MenuItem,
-  Skeleton,
-  Snackbar,
   Tooltip,
 } from "@mui/material";
 import { Link, Route, Routes } from "react-router-dom";
 import Academics from "./Academics";
 import Projects from "./Projects";
 import Resume from "./Resume";
-import BreadCrumbComponent from "./BreadCrumbComponent";
 import SocialProfiles from "./SocialProfiles";
 import { setDrawerOpen, setSnackbarOpen } from "../redux/slices/systemSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { setActivePage, setActiveSideMenu } from "../redux/slices/navSlice";
 import {
   CloseRounded,
-  CodeOutlined,
-  HomeMaxOutlined,
-  HomeOutlined,
-  SchoolOutlined,
 } from "@mui/icons-material";
 import Home from "./Home";
 import { useState } from "react";
 import { useEffect } from "react";
-import { CodeFilled, HomeFilled } from "@ant-design/icons";
-
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -93,29 +82,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
-
-// const AppBar = styled(MuiAppBar, {
-//   shouldForwardProp: (prop) => prop !== "open",
-// })(({ theme, open }) => ({
-//   zIndex: theme.zIndex.drawer + 1,
-//   display: "flex",
-//   flexDirection: "row",
-//   justifyContent: "space-between",
-//   alignItems: "center",
-//   transition: theme.transitions.create(["width", "margin"], {
-//     easing: theme.transitions.easing.sharp,
-//     duration: theme.transitions.duration.leavingScreen,
-//   }),
-//   ...(open && {
-//     marginLeft: drawerWidth,
-//     width: `calc(100% - ${drawerWidth}px)`,
-//     transition: theme.transitions.create(["width", "margin"], {
-//       easing: theme.transitions.easing.sharp,
-//       duration: theme.transitions.duration.enteringScreen,
-//     }),
-//   }),
-// }));
-
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -179,11 +145,24 @@ export default function Dashboard() {
     fetch_data();
   }, []);
 
+  //Pop Up Navigation
+  const [isVisible, setIsVisible] = useState(false);
+  const [centerIndex, setCenterIndex] = useState(0);
+  var iconsCount = 0;
+  const toggleIcons = () => {
+    console.log("center: "+ centerIndex)
+    setIsVisible(!isVisible);
+  };
+
+  const handleIconClick = (index) => {
+    console.log(index)
+    setCenterIndex(index);
+    toggleIcons();
+  };
+
   const theme = useTheme();
-  // const [drawerOpen, setDrawerOpen] = React.useState(DEFAULT_DRAWER_FLAG);
-  // const [ActivePage, setActivePage] = React.useState(DEFAULT_ACTIVE_PAGE);
   const [dataStatus, setDataStatus] = React.useState(false);
-  // const [activeSideMenu, setactiveSideMenu] = React.useState(0);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const userName = userProfileDefaultData.Name;
   const openAvatarMenu = Boolean(anchorEl);
@@ -221,76 +200,7 @@ export default function Dashboard() {
     dispatch(setSnackbarOpen({ snackbarOpen: true, snackbarMessage: message }));
   };
 
-  const activeBtnChange = (index) => {
-    setDataStatus(true);
-    dispatch(setActivePage({ activePage: DEFAULT_SIDE_MENU[index] }));
-    dispatch(setActiveSideMenu({ activeSideMenu: index }));
-  };
 
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    dispatch(setSnackbarOpen({ snackbarOpen: false, snackbarMessage: null }));
-  };
-
-  const action = (
-    <React.Fragment>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleCloseSnackbar}
-      >
-        <CloseRounded fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
-
-  // const [leftIcon, setLeftIcon] = useState(<CodeOutlined style={{ fontSize: "50px" }} />);
-  // const [rightIcon, setRightIcon] = useState(<SchoolOutlined style={{ fontSize: "50px" }} />);
-  const [isVisible, setIsVisible] = useState(false);
-  const [centerIndex, setCenterIndex] = useState(0);
-
-  // const handleSwap = (index)=>{
-  //     setCenterIndex(index)
-  // }
-
-  const handleIconClick = (index) => {
-    if (index !== centerIndex) {
-      setCenterIndex(index); // Update the center index with the clicked icon's index
-    }
-  };
-  const toggleIcons = () => {
-    setIsVisible(!isVisible);
-  };
-  // Toggle visibility of the left and right icons
-  // const showNavIcons = () => {
-  //   setIsVisible(!isVisible);
-  // };
-
-  // // Handle swapping icons
-  // const swapIcon = (clickedIcon) => {
-  //   setCenterIcon(clickedIcon);
-  // };
-
-  // Function to handle swapping left icon with center
-  // const swapWithLeft = () => {
-  //   setIsVisible(!isVisible)
-  //   const temp = centerIcon;
-  //   setCenterIcon(leftIcon);
-  //   setLeftIcon(temp);
-
-  // };
-
-  // // Function to handle swapping right icon with center
-  // const swapWithRight = () => {
-  //   setIsVisible(!isVisible)
-  //   const temp = centerIcon;
-  //   setCenterIcon(rightIcon);
-  //   setRightIcon(temp);
-
-  // };
 
   return (
     <Box sx={{ display: "flex" }} className="MainContainer">
@@ -310,51 +220,10 @@ export default function Dashboard() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-              color: "#544600",
-            }}
-          >
-            {IconTitleMap[ActivePage.title]} {ActivePage.title}
-          </Typography>
         </Toolbar>
-        <Box className="profile">
-          <Avatar
-            alt={userName}
-            src={userImage}
-            sx={{ mr: 7, border: "3px solid #544600", cursor: "pointer" }}
-            onClick={handleClick}
-          />
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={openAvatarMenu}
-            onClose={handleCloseAvatarMenu}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-            }}
-          >
-            {/* Todo: Extract out in a list in constants file also add resume */}
-            <MenuItem onClick={() => AvatarMenuClickHandler(0)}>
-              Profile
-            </MenuItem>
-            <MenuItem onClick={() => AvatarMenuClickHandler(1)}>
-              Download Resume
-            </MenuItem>
-            <MenuItem onClick={() => AvatarMenuClickHandler(2)}>
-              Dark Mode
-            </MenuItem>
-          </Menu>
-        </Box>
       </AppBar>
 
-      <Drawer variant="permanent" open={drawerOpen}>
+      {/* <Drawer variant="permanent" open={drawerOpen}>
         <DrawerHeader
           className={`${drawerOpen ? "show sideFloatClass" : "hide"}`}
         >
@@ -431,14 +300,10 @@ export default function Dashboard() {
             </div>
           ))}
         </List>
-      </Drawer>
+      </Drawer> */}
 
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-
-        {dataStatus ? (
+      <Box component="main" sx={{ pt: '7rem', overflow:'scroll'}}>
           <div className="MainComponent">
-            <BreadCrumbComponent data={["Portfolio", ActivePage.title]} />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/home" element={<Home />} />
@@ -449,100 +314,45 @@ export default function Dashboard() {
               <Route path="*" element={<h1>Jai sairam! Page not found</h1>} />
             </Routes>
           </div>
-        ) : (
-          <div className="SkeletonComponent" style={{ padding: "1%" }}>
-            <Skeleton
-              sx={{ mb: 1, width: "98%" }}
-              variant="rectangular"
-              height={80}
-            />
-            <Skeleton
-              sx={{ mb: 1, width: "90%" }}
-              variant="rectangular"
-              height={100}
-            />
-            <Skeleton
-              sx={{ mb: 1, width: "100%" }}
-              variant="rectangular"
-              height={210}
-            />
-          </div>
-        )}
+      </Box>
 
-{/* <div className="navIconsContainer">
+      <div
+      className="navIconsContainer"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <div
         className={`default-icon center-icon visible`}
         onClick={toggleIcons}
+        key={centerIndex}
       >
         {DEFAULT_SIDE_MENU[centerIndex].icon}
       </div>
-
-      {DEFAULT_SIDE_MENU.map((data, index) =>
-        index !== centerIndex ? (
+      {DEFAULT_SIDE_MENU.map((data, index) => {
+        
+        if (index === centerIndex) return null;
+        iconsCount++;
+        return (
           <div
             className={`default-icon ${
-              index < 3 ? "left-icon" : "right-icon"
-            } ${isVisible ? 'visible' : ''}`}
+              iconsCount < 3 ? "left-icon" : "right-icon"
+            } ${isVisible ? "visible" : ""}`}
             key={index}
             onClick={() => handleIconClick(index)}
-            style={{ "--index": index }}
+            style={{
+              "--index": iconsCount,
+            }}
           >
-            {data.icon}
+            <Link to={data.link} className="navLinks">
+            {data.icon}</Link>
           </div>
-        ) : null 
-      )}
-    </div> */}
+        );
+      })}
+    </div>
 
-        {/* <div className="navIconsContainer">
-<Link className="sideMenuLinks" to="/">
-      <div
-        className={`nav-icon default-icon left-icon ${
-          isVisible ? "visible" : ""
-        }`}
-        onClick={swapWithLeft} // Swap on click
-      >
-        {leftIcon}
-      </div>
-      </Link>
-
-      <div className="home-button default-icon" onClick={showNavIcons}>
-        {centerIcon}
-      </div>
-      <div
-        className={`nav-icon default-icon right-icon ${
-          isVisible ? "visible" : ""
-        }`}
-        onClick={swapWithRight} // Swap on click
-      >
-        {rightIcon}
-      </div>
-    </div> */}
-
-        {/* <div className="navIconsContainer">
-          <div
-            className={`nav-icon default-icon left-icon ${isVisible ? "visible" :""}`}
-            onClick={iconClick}
-          >
-            <CodeOutlined sx={{ fontSize: "50px" }} />
-          </div>
-
-          <div className="home-button default-icon" onClick={showNavIcons}>
-            <HomeOutlined sx={{ fontSize: "50px" }} />
-          </div>
-          <div
-            className={`nav-icon default-icon right-icon ${isVisible ? "visible" : ""}`}
-          >
-            <SchoolOutlined sx={{ fontSize: "50px" }} />
-          </div>
-        </div> */}
-      </Box>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        message={snackbarMessage}
-        action={action}
-      />
     </Box>
   );
 }
