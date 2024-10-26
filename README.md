@@ -248,4 +248,3 @@ npm install
 ### Note
 
 Ensure that both the frontend and backend servers are running concurrently for the application to function correctly. You may also consider using tools like `concurrently` to manage running both servers simultaneously from a single command.
-```
