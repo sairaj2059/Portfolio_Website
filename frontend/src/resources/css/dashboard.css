@@ -108,7 +108,7 @@
 
 .right-icon.visible {
   opacity: 1;
-  transform: translateX(calc(50px * (var(--index) - 2)));
+  transform: translateX(calc(50px * (var(--index) - 1.75)));
 }
 
 

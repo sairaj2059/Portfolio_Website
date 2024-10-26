@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActiveSideMenu } from "../redux/slices/navSlice";
 import Home from "./Home";
 import { useState } from "react";
+import PageNotFound from "./PageNotFound";
 export default function Dashboard() {
 
   //Pop Up Navigation
@@ -50,7 +51,7 @@ export default function Dashboard() {
               <Route path="/resume" element={<Resume />} />
               <Route path="/academics" element={<Academics />} />
               <Route path="/social-profile" element={<SocialProfiles />} />
-              <Route path="*" element={<h1>Jai sairam! Page not found</h1>} />
+              <Route path="*" element={<PageNotFound/>} />
             </Routes>
           </div>
       </Box>

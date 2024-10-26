@@ -30,8 +30,7 @@ function Home() {
   const [isSocialMediaIcon, setIsSocialMediaIcon] = useState(false);
 
   const handleSocialMediaIcon = () => {
-    console.log("SAIRAM FORM ICONS")
-    setIsSocialMediaIcon((prev)=>!prev);
+    setIsSocialMediaIcon(!isSocialMediaIcon);
   };
 
   const userName = userProfileDefaultData.Name;
@@ -82,12 +81,11 @@ function Home() {
         <div className="icons">
           <Button
             variant="contained"
-            onMouseEnter={handleSocialMediaIcon}
             onClick={handleSocialMediaIcon}
             sx={{
               borderRadius: "50rem",
               backgroundColor: "#a79248",
-              ":hover": { backgroundColor: "#85732a" },
+              
             }}
           >
             Get in touch{"->"}
@@ -100,9 +98,8 @@ function Home() {
                   color: "black",
                   backgroundColor: "#a79248",
                   cursor: "pointer",
-                  opacity: 0,
                   transition: "transform 0.5s ease, opacity 0.5s ease",
-                  ":hover": { backgroundColor: "#85732a" },
+                  opacity: isSocialMediaIcon? 1: 0,
                 }}
               >
                 {data.icon}

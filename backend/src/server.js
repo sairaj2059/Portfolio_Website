@@ -4,6 +4,7 @@ const app = express()
 const cors = require('cors')
 require('dotenv').config()
 const path = require('path');
+const fs = require("fs");
 
 
 const usersRoute = require('./Routes/users')
@@ -13,6 +14,7 @@ app.get('/downloadPdf', (req, res) => {
     const filePath = path.join(__dirname, './public/Raj_Guragain_Resume.pdf');
     res.sendFile(filePath);
 });
+
 
 // Use routes
 app.use(cors())

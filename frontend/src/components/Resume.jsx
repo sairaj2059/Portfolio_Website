@@ -4,6 +4,8 @@ import { Button } from "antd";
 import React from "react";
 import "../resources/css/resume.css";
 
+
+
 function Resume() {
   const downloadPdf = async () => {
     try {
@@ -30,7 +32,6 @@ function Resume() {
       console.error("There was a problem with the fetch operation:", error);
     }
   };
-
   return (
     <>
       <Box
@@ -38,9 +39,9 @@ function Resume() {
           height: "50vh",
           display: "flex",
           flexWrap: "wrap",
-          alignContent:'center',
+          alignContent: "center",
           justifyContent: "center",
-          gap:'2rem'
+          gap: "2rem",
         }}
       >
         <Typography variant="h2" sx={{ fontSize: "60px", textAlign: "center" }}>
@@ -73,19 +74,19 @@ function Resume() {
           >
             Download
           </Button>
-          <Button
+          {/* <Button
             type="primary"
             shape="round"
             icon={<EyeFilled />}
             size={"large"}
-            onClick={downloadPdf}
+            onClick={viewPdf}
             style={{
               background: "#a79248",
               "&:hover": { background: "#c8ad51c" },
             }}
           >
             View
-          </Button>
+          </Button> */}
         </Box>
       </Box>
     </>
@@ -93,3 +94,6 @@ function Resume() {
 }
 
 export default Resume;
+
+
+
