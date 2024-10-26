@@ -74,19 +74,6 @@ function Resume() {
           >
             Download
           </Button>
-          {/* <Button
-            type="primary"
-            shape="round"
-            icon={<EyeFilled />}
-            size={"large"}
-            onClick={viewPdf}
-            style={{
-              background: "#a79248",
-              "&:hover": { background: "#c8ad51c" },
-            }}
-          >
-            View
-          </Button> */}
         </Box>
       </Box>
     </>
@@ -94,6 +81,3 @@ function Resume() {
 }
 
 export default Resume;
-
-
-

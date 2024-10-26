@@ -13,6 +13,7 @@ import SocialProfiles from "./SocialProfiles";
 import { useDispatch, useSelector } from "react-redux";
 import { setActiveSideMenu } from "../redux/slices/navSlice";
 import Home from "./Home";
+import userImage from "../resources/images/dp_image.png"
 import { useState } from "react";
 import PageNotFound from "./PageNotFound";
 export default function Dashboard() {
@@ -93,7 +94,6 @@ export default function Dashboard() {
         );
       })}
     </div>
-
     </Box>
   );
 }

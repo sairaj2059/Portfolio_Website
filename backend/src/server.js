@@ -6,7 +6,6 @@ require('dotenv').config()
 const path = require('path');
 const fs = require("fs");
 
-
 const usersRoute = require('./Routes/users')
 
 app.use(cors());

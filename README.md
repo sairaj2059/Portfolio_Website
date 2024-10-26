@@ -90,6 +90,7 @@ root/
 ## Features
 
 ### Home Page
+
 - Personalized greeting message with typewriter effect.
 - Get in touch button for social media links.
 
@@ -118,6 +119,7 @@ root/
 - Redux Toolkit
 - Typewriter-effect
 - Axios
+
 
 ### Backend
 
@@ -179,6 +181,7 @@ For backend:
 
 ```bash
 cd ./backend
+
 npm install
 ```
 
