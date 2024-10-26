@@ -85,7 +85,7 @@ root/
         │       ├── java.png
         │       └── picture_1.jpeg
         └── setupTests.js
-
+```
 
 ## Features
 
