@@ -1,6 +1,3 @@
-Here's the updated README file incorporating your changes, including the new directory structure and detailed feature descriptions:
-
-```markdown
 # Portfolio Project
 
 This portfolio website is built using **React**, **Material UI**, **Ant Design**, and **Express**. It showcases personal projects, social media profiles, academic background, and includes a downloadable resume. Each component has been customized for a cohesive look, with additional state management and local storage functionality.
@@ -88,7 +85,7 @@ root/
         │       ├── java.png
         │       └── picture_1.jpeg
         └── setupTests.js
-```
+
 
 ## Features
 
