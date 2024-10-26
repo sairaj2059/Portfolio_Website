@@ -8,11 +8,8 @@ import { useState } from "react";
 const { Meta } = Card;
 
 function Projects() {
-  const [isLiked, setIsLiked] = useState(false);
   const [likedCard, setLikedCard] = useState([])
 
-
-  const [activeCard, setActiveCard] = useState(-1);
   const handleLike = (index) => {
     setLikedCard((prevLikedCards) => {
       if (prevLikedCards.includes(index)) {
