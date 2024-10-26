@@ -38,31 +38,31 @@ export const IconTitleMap = {
 
 export const DEFAULT_SIDE_MENU = [
   {
-    id:1,
+    id:0,
     title: "Home",
     icon: IconTitleMap.Home,
     link: "/home",
   },
   {
-    id:2,
+    id:1,
     title: "Academics",
     icon: IconTitleMap.Academics,
     link: "/academics",
   },
   {
-    id:3,
+    id:2,
     title: "Projects",
     icon: IconTitleMap.Projects,
     link: "/projects",
   },
   {
-    id:4,
+    id:3,
     title: "Social Profiles",
     icon: IconTitleMap["Social Profiles"],
     link: "/social-profile",
   },
   {
-    id:5,
+    id:4,
     title: "Resume",
     icon: IconTitleMap.Resume,
     link: "/resume",
@@ -87,7 +87,7 @@ export const SOCIAL_MEDIA_ICONS = [
 
 
 export const DEFAULT_DRAWER_FLAG = true;
-export const DEFAULT_ACTIVE_PAGE = DEFAULT_SIDE_MENU[0];
+export const DEFAULT_ACTIVE_PAGE = 0 ;
 
 export const DarkTheme = "dark";
 export const LightTheme = "light";
