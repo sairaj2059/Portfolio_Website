@@ -1,19 +1,12 @@
+import { FacebookFilled, GithubFilled, InstagramFilled, LinkedinFilled } from "@ant-design/icons";
 import defaultImage from "../resources/images/dp_image.png";
 import {
   CodeRounded,
   DraftsRounded,
   HomeRounded,
   SchoolRounded,
-  ThumbUpAlt,
   ContactPageRounded,
-  GitHub,
-  Facebook,
-  LinkedIn,
 } from "@mui/icons-material";
-import MailIcon from "@mui/icons-material/Mail";
-import ErrorIcon from "@mui/icons-material/Error";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CallIcon from "@mui/icons-material/Call";
 export const userProfileDefaultData = {
   Name: "Raj Guragain",
   UserName: "raj_guragain",
@@ -31,9 +24,10 @@ export const IconTitleMap = {
   Projects: <CodeRounded className="icon" />,
   "Social Profiles": <DraftsRounded className="icon" />,
   Resume: <ContactPageRounded className="icon" />,
-  GitHub: <GitHub className="icon" />,
-  Facebook: <Facebook className="icon" />,
-  LinkedIn: <LinkedIn className="icon" />,
+  GitHub: <GithubFilled className="icon" />,
+  Facebook: <FacebookFilled className="icon" />,
+  LinkedIn: <LinkedinFilled className="icon" />,
+  Instagram: <InstagramFilled className="icon"/>
 };
 
 export const DEFAULT_SIDE_MENU = [
@@ -80,6 +74,9 @@ export const SOCIAL_MEDIA_ICONS = [
   },
   {
     icon: IconTitleMap.Facebook,
+    link: "/",
+  },{
+    icon: IconTitleMap.Instagram,
     link: "/",
   },
 ];

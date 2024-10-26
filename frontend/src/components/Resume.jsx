@@ -1,61 +1,94 @@
+import { DownloadOutlined, EyeFilled } from "@ant-design/icons";
+import { Box, Typography } from "@mui/material";
+import { Button } from "antd";
 import React from "react";
-import { DEFAULT_SIDE_MENU } from "../Utils/Constants";
-import { useState } from "react";
 import "../resources/css/resume.css";
-import { Link } from "react-router-dom";
 
 function Resume() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [centerIndex, setCenterIndex] = useState(0);
-  var iconsCount = 0;
+  const downloadPdf = async () => {
+    try {
+      const response = await fetch("http://localhost:13000/downloadPdf");
 
-  const toggleIcons = () => {
-    console.log("center: "+ centerIndex)
-    setIsVisible(!isVisible);
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "file.pdf";
+
+      document.body.appendChild(a);
+      a.click();
+
+      // Clean up
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
   };
 
-  const handleIconClick = (index) => {
-    console.log(index)
-    setCenterIndex(index);
-    toggleIcons();
-  };
   return (
-    <div
-      className="navIconsContainer"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <div
-        className={`default-icon center-icon visible`}
-        onClick={toggleIcons}
-        key={centerIndex}
+    <>
+      <Box
+        sx={{
+          height: "50vh",
+          display: "flex",
+          flexWrap: "wrap",
+          alignContent:'center',
+          justifyContent: "center",
+          gap:'2rem'
+        }}
       >
-        {DEFAULT_SIDE_MENU[centerIndex].icon}
-      </div>
-      {DEFAULT_SIDE_MENU.map((data, index) => {
-        
-        if (index === centerIndex) return null; 
-        iconsCount++;
-        return (
-          <div
-            className={`default-icon ${
-              iconsCount < 3 ? "left-icon" : "right-icon"
-            } ${isVisible ? "visible" : ""}`}
-            key={index}
-            onClick={() => handleIconClick(index)}
-            style={{
-              "--index": iconsCount, 
+        <Typography variant="h2" sx={{ fontSize: "60px", textAlign: "center" }}>
+          "Let's build something great! Checkout my resume to explore my
+          expertise and how <br />{" "}
+          <Typography
+            variant="h2"
+            sx={{
+              color: "#a79248",
+              fontFamily: "Source Code Pro",
+              fontWeight: "400",
+              WebkitTextStroke: "0.05rem black",
             }}
           >
-            <Link to={data.link} className="navLinks">
-            {data.icon}</Link>
-          </div>
-        );
-      })}
-    </div>
+            {`I can contribute to your success!"`.toUpperCase()}
+          </Typography>
+        </Typography>
+
+        <Box sx={{ display: "flex", gap: "1rem" }}>
+          <Button
+            type="primary"
+            shape="round"
+            icon={<DownloadOutlined />}
+            size={"large"}
+            onClick={downloadPdf}
+            style={{
+              background: "#a79248",
+              ":hover": { color: "red" },
+            }}
+          >
+            Download
+          </Button>
+          <Button
+            type="primary"
+            shape="round"
+            icon={<EyeFilled />}
+            size={"large"}
+            onClick={downloadPdf}
+            style={{
+              background: "#a79248",
+              "&:hover": { background: "#c8ad51c" },
+            }}
+          >
+            View
+          </Button>
+        </Box>
+      </Box>
+    </>
   );
 }
 

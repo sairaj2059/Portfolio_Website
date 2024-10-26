@@ -10,7 +10,7 @@ import dpImage from "../resources/images/dp_image.png";
 import axios from "axios";
 
 function Home() {
-  const [userProfileDefaultData, setUserProfileDefaultData] = useState({})
+  const [userProfileDefaultData, setUserProfileDefaultData] = useState({});
   useEffect(() => {
     async function fetch_data() {
       try {
@@ -26,6 +26,14 @@ function Home() {
     }
     fetch_data();
   }, []);
+
+  const [isSocialMediaIcon, setIsSocialMediaIcon] = useState(false);
+
+  const handleSocialMediaIcon = () => {
+    console.log("SAIRAM FORM ICONS")
+    setIsSocialMediaIcon((prev)=>!prev);
+  };
+
   const userName = userProfileDefaultData.Name;
   return (
     <div className="mainContainer">
@@ -35,7 +43,7 @@ function Home() {
           sx={{
             fontFamily: "Source Code Pro",
             WebkitTextStroke: "0.05rem black",
-            color:'#544600'
+            color: "#544600",
           }}
         >
           HEY👋
@@ -74,21 +82,32 @@ function Home() {
         <div className="icons">
           <Button
             variant="contained"
-            sx={{ borderRadius: "50rem", backgroundColor: "#a79248", ":hover":{backgroundColor: "#85732a"} }}
+            onMouseEnter={handleSocialMediaIcon}
+            onClick={handleSocialMediaIcon}
+            sx={{
+              borderRadius: "50rem",
+              backgroundColor: "#a79248",
+              ":hover": { backgroundColor: "#85732a" },
+            }}
           >
             Get in touch{"->"}
           </Button>
           {SOCIAL_MEDIA_ICONS.map((data, index) => (
             <Link to={data.link} key={index}>
-            <Avatar
-              sx={{
-                color: "black",
-                backgroundColor: "white",
-                cursor: "pointer",
-              }}
-            >
-              {data.icon}
-            </Avatar></Link>
+              <Avatar
+                className={isSocialMediaIcon ? "visible" : ""}
+                sx={{
+                  color: "black",
+                  backgroundColor: "#a79248",
+                  cursor: "pointer",
+                  opacity: 0,
+                  transition: "transform 0.5s ease, opacity 0.5s ease",
+                  ":hover": { backgroundColor: "#85732a" },
+                }}
+              >
+                {data.icon}
+              </Avatar>
+            </Link>
           ))}
         </div>
       </div>

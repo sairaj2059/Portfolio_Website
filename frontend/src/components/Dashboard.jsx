@@ -3,8 +3,6 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import "../resources/css/dashboard.css";
-import axios from "axios";
-// import userName from
 import { DEFAULT_SIDE_MENU } from "../Utils/Constants";
 
 import { Link, Route, Routes } from "react-router-dom";
@@ -16,24 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActiveSideMenu } from "../redux/slices/navSlice";
 import Home from "./Home";
 import { useState } from "react";
-import { useEffect } from "react";
 export default function Dashboard() {
-  const [userProfileDefaultData, setUserProfileDefaultData] = useState({});
-  useEffect(() => {
-    async function fetch_data() {
-      try {
-        console.log("inside fetch");
-        const response = await axios.get(
-          "http://localhost:13000/users/getData"
-        );
-        setUserProfileDefaultData(response.data);
-        console.log(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    fetch_data();
-  }, []);
 
   //Pop Up Navigation
   const [isVisible, setIsVisible] = useState(false);
