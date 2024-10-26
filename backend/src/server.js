@@ -4,8 +4,8 @@ const app = express()
 const cors = require('cors')
 require('dotenv').config()
 const path = require('path');
+const fs = require("fs");
 
-// Include route files
 const usersRoute = require('./Routes/users')
 
 app.use(cors());

@@ -1,6 +1,6 @@
 # Portfolio Project
 
-This portfolio website is built using **React**, **Material UI**, **Joy UI**, and **Ant Design**. It showcases personal projects, social media profiles, academic background, and includes a downloadable resume. Each component has been customized for a cohesive look, with additional state management and local storage functionality.
+This portfolio website is built using **React**, **Material UI**, **Ant Design**, and **Express**. It showcases personal projects, social media profiles, academic background, and includes a downloadable resume. Each component has been customized for a cohesive look, with additional state management and local storage functionality.
 
 ## Table of Contents
 
@@ -20,75 +20,113 @@ This portfolio highlights various personal projects, social links, and academic 
 
 ```bash
 root/
-│
-├── public/
-│   ├── index.html
-│   ├── Karthikeya_Bhamidipati_Resume.pdf
-│   ├── LOGO.jpeg
-│   ├── manifest.json
-│   └── robots.txt
-├── src/
-│   ├── components/
-│   │   ├── Academics.jsx
-│   │   ├── Dashboard.jsx
-│   │   ├── Home.jsx
-│   │   ├── PageNotFound.jsx
-│   │   ├── Profile.jsx
-│   │   └── Projects.jsx
-│   ├── redux/
-│   │   ├── slices/
-│   │   │   └── navSlice.js
-│   │   └── store.js
-│   ├── resources/
-│   │   ├── css/
-│   │   │   ├── academics.css
-│   │   │   ├── dashboard.css
-│   │   │   ├── home.css
-│   │   │   ├── profile.css
-│   │   │   ├── projects.css
-│   │   │   └── shared.css
-│   │   └── images/
-│   │       └── projects/
-│   ├── Utils/
-│   │   └── Constants.js
-│   ├── App.css
-│   ├── App.js
-│   ├── index.css
-│   └── index.js
-├── .gitignore
-├── package-lock.json
-├── package.json
-└── README.md
+├── README.md
+├── backend
+│   ├── package-lock.json
+│   ├── package.json
+│   └── src
+│       ├── Routes
+│       │   └── users.js
+│       ├── public
+│       │   └── Raj_Guragain_Resume.pdf
+│       └── server.js
+└── frontend
+    ├── package-lock.json
+    ├── package.json
+    ├── public
+    │   ├── index.html
+    │   ├── manifest.json
+    │   └── robots.txt
+    └── src
+        ├── App.css
+        ├── App.js
+        ├── App.test.js
+        ├── Utils
+        │   ├── Constants.js
+        │   └── otherDetails.js
+        ├── components
+        │   ├── Academics.jsx
+        │   ├── Dashboard.jsx
+        │   ├── Home.jsx
+        │   ├── PageNotFound.jsx
+        │   ├── Projects.jsx
+        │   ├── Resume.jsx
+        │   └── SocialProfiles.jsx
+        ├── index.css
+        ├── index.js
+        ├── logo.svg
+        ├── redux
+        │   ├── slices
+        │   │   └── navSlice.jsx
+        │   └── store.jsx
+        ├── reportWebVitals.js
+        ├── resources
+        │   ├── css
+        │   │   ├── academics.css
+        │   │   ├── breadcrumb.css
+        │   │   ├── dashboard.css
+        │   │   ├── home.css
+        │   │   ├── projects.css
+        │   │   ├── resume.css
+        │   │   └── socialprofiles.css
+        │   ├── fonts
+        │   │   ├── ConcertOne-Regular.ttf
+        │   │   └── SourceCodePro-VariableFont_wght.ttf
+        │   └── images
+        │       ├── C icon.png
+        │       ├── backgroundImage.png
+        │       ├── c++.png
+        │       ├── defaultImage.jpg
+        │       ├── defaultImg.jpeg
+        │       ├── defaultImg.png
+        │       ├── dpImage.jpeg
+        │       ├── dp_image.jpeg
+        │       ├── dp_image.png
+        │       ├── java.png
+        │       └── picture_1.jpeg
+        └── setupTests.js
 ```
 
 ## Features
 
 ### Home Page
-- Personalized greeting message with typewriter effect
-- Resume download button
 
-### Profile Page
-- Links to various social profiles
+- Personalized greeting message with typewriter effect.
+- Get in touch button for social media links.
+
+### Social Profile Page
+- Typewriter effect for displaying all social media profiles.
+- Links to various social profiles.
 
 ### Projects Page
-- Displays a grid of projects with descriptions and links
+- Displays a grid of projects with descriptions, links, and an option to like.
 
 ### Academics Page
-- Timeline showcasing educational achievements
+- Showcasing academic achievements.
+- Added accordion and map links.
 
-### 404 Page
-- Custom error page with data fetching (used as a learning exercise)
+### Page Not Found Page
+- Custom error page with data fetching (used as a learning exercise).
 
 ## Dependencies
 
+### Frontend
+
 - React
 - Material UI
-- Joy UI
 - Ant Design
 - React Router
 - Redux Toolkit
 - Typewriter-effect
 - Axios
+
+
+### Backend
+
+- Express
+- cors
+- nodemon
+- dotenv
 
 ## Scripts
 
@@ -121,27 +159,93 @@ npm run lint
 Clone this repository:
 
 ```bash
-git clone https://github.com/karthikeya-bhamidipati/PorfolioProject.git
+git clone https://github.com/sairaj2059/Portfolio_Website.git
 ```
 
 Navigate to the project directory:
 
 ```bash
-cd PorfolioProject
+cd Portfolio_Website
 ```
 
-Install all dependencies:
+Install all dependencies for both frontend and backend:
+
+For frontend:
 
 ```bash
+cd frontend
+npm install
+```
+
+For backend:
+
+```bash
+cd ./backend
+
 npm install
 ```
 
 ## How to Run
 
-After completing installation, run the project locally with:
+### Frontend
 
-```bash
-npm start
+1. **Navigate to the Frontend Directory**:
+
+   ```bash
+   cd /frontend
+   ```
+
+2. **Install Dependencies**:
+
+   Use npm to install the necessary dependencies for the frontend:
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the Frontend Development Server**:
+
+   To run the frontend application, use the following command:
+
+   ```bash
+   npm start
+   ```
+
+   This will launch the React application in your default web browser at `http://localhost:3000`.
+
+### Backend
+
+1. **Navigate to the Backend Directory**:
+
+   ```bash
+   cd /backend
+   ```
+
+2. **Install Dependencies**:
+
+   Use npm to install the necessary dependencies for the backend:
+
+   ```bash
+   npm install
+   ```
+
+3. **Create a `.env` File**:
+
+   Ensure you create a `.env` file in the backend directory to set your environment variables. Here’s an example structure:
+
+   ```bash
+   PORT=13000
+   ```
+
+4. **Start the Backend Server**:
+
+   To run the backend application, use the following command:
+
+   ```bash
+   npm run nodemonStart
+   ```
+
+### Note
+
+Ensure that both the frontend and backend servers are running concurrently for the application to function correctly. You may also consider using tools like `concurrently` to manage running both servers simultaneously from a single command.
 ```
-
-This will launch the application on your local server, allowing you to view the portfolio website.

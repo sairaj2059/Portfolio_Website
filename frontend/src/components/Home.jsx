@@ -6,24 +6,33 @@ import Typewriter from "typewriter-effect";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import dpImage from "../resources/images/dp_image.png"
+import dpImage from "../resources/images/dp_image.png";
 import axios from "axios";
 
 function Home() {
-  const [userProfileDefaultData, setUserProfileDefaultData] = useState({})
+  const [userProfileDefaultData, setUserProfileDefaultData] = useState({});
   useEffect(() => {
-    function fetch_data() {
-        axios.get("http://localhost:13000/users/getData")
-            .then((response) => {
-                setUserProfileDefaultData(response.data);
-                console.log(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+    async function fetch_data() {
+      try {
+        console.log("inside fetch");
+        const response = await axios.get(
+          "http://localhost:13000/users/getData"
+        );
+        setUserProfileDefaultData(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
     fetch_data();
-}, []);
+  }, []);
+
+  const [isSocialMediaIcon, setIsSocialMediaIcon] = useState(false);
+
+  const handleSocialMediaIcon = () => {
+    setIsSocialMediaIcon(!isSocialMediaIcon);
+  };
+
   const userName = userProfileDefaultData.Name;
   return (
     <div className="mainContainer">
@@ -33,7 +42,7 @@ function Home() {
           sx={{
             fontFamily: "Source Code Pro",
             WebkitTextStroke: "0.05rem black",
-            color:'#544600'
+            color: "#544600",
           }}
         >
           HEY👋
@@ -72,21 +81,30 @@ function Home() {
         <div className="icons">
           <Button
             variant="contained"
-            sx={{ borderRadius: "50rem", backgroundColor: "#a79248", ":hover":{backgroundColor: "#85732a"} }}
+            onClick={handleSocialMediaIcon}
+            sx={{
+              borderRadius: "50rem",
+              backgroundColor: "#a79248",
+              
+            }}
           >
             Get in touch{"->"}
           </Button>
           {SOCIAL_MEDIA_ICONS.map((data, index) => (
             <Link to={data.link} key={index}>
-            <Avatar
-              sx={{
-                color: "black",
-                backgroundColor: "white",
-                cursor: "pointer",
-              }}
-            >
-              {data.icon}
-            </Avatar></Link>
+              <Avatar
+                className={isSocialMediaIcon ? "visible" : ""}
+                sx={{
+                  color: "black",
+                  backgroundColor: "#a79248",
+                  cursor: "pointer",
+                  transition: "transform 0.5s ease, opacity 0.5s ease",
+                  opacity: isSocialMediaIcon? 1: 0,
+                }}
+              >
+                {data.icon}
+              </Avatar>
+            </Link>
           ))}
         </div>
       </div>

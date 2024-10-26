@@ -43,3 +43,8 @@
   margin-top: 70px;
   gap: 10px;
 }
+
+.visible{
+  transform: translate(10px);
+  opacity: 1;
+}

@@ -3,4 +3,12 @@
     &:hover{
         transform: scale(1.05);
     }
+
+}
+
+.academicsContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
 }
